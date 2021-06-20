@@ -72,12 +72,16 @@
 		</div>
 		<div class="form-group">
 			<label for="formDepartmentId" asp-for="DepartmentId">Отдел</label>
-			<select class="form-control" name="DepartmentId" id="formDepartmentId" asp-for="DepartmentId" required></select>
+			<select class="form-control" name="DepartmentId" id="formDepartmentId" asp-for="DepartmentId" required>
+				<option selected="selected"></option>
+			</select>
 			<span asp-validation-for="DepartmentId" />
 		</div>
 		<div class="form-group">
 			<label for="formLanguageId" asp-for="LanguageId">Язык</label>
-			<select class="form-control" name="LanguageId" id="formLanguageId" asp-for="LanguageId" required></select>
+			<select class="form-control" name="LanguageId" id="formLanguageId" asp-for="LanguageId" required>
+				<option selected="selected"></option>
+			</select>
 			<span asp-validation-for="LanguageId" />
 		</div>
 		<button type="submit" class="btn btn-primary mb-2">Добавить сотрудника</button>
