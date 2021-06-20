@@ -74,16 +74,7 @@ body {
 }
 
 .ui-autocomplete {
-    position: absolute !important;
-    cursor: default !important;
     background: #FFF !important;
-}
-
-.ui-menu {
-    list-style: none !important;
-    margin: 0 !important;
-    display: block !important;
-    float: left !important;
 }
 
 .ui-menu .ui-menu {
@@ -105,11 +96,6 @@ body {
     font-weight: 400 !important;
     line-height: 1.5 !important;
     color: #495057 !important;
-}
-
-.dialogWithDropShadow {
-    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 table.table.table-striped {

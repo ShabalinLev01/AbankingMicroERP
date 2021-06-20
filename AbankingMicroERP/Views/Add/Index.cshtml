@@ -3,24 +3,24 @@
 	ViewData["Title"] = "Добавление сотрудника";
 }
 <script>
-	$(function () {
+	$(function() {
 		$("#formName").autocomplete({
-			source: function (request, response) {
+			source: function(request, response) {
 				$.ajax({
 					url: "/Home/GetNames",
 					type: "GET",
 					dataType: "json",
 					data: { Prefix: request.term },
-					success: function (data) {
-						response($.map(data, function (item) {
-							return {
-								label: item
-							};
-						}));
+					success: function(data) {
+						response($.map(data,
+							function(item) {
+								return {
+									label: item
+								};
+							}));
 					}
 				});
 			}
-
 		});
 	});
 
