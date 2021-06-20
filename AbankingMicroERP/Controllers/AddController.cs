@@ -7,11 +7,11 @@ namespace AbankingMicroERP.Controllers
 {
 	public class AddController : Controller
 	{
-		private readonly AbankingContext _gContext;
+		private readonly AbankingContext _context;
 
-		public AddController(AbankingContext gContext)
+		public AddController(AbankingContext context)
 		{
-			_gContext = gContext;
+			_context = context;
 		}
 
 		public IActionResult Index()
@@ -25,13 +25,13 @@ namespace AbankingMicroERP.Controllers
 			if (!ModelState.IsValid)
 				return View(employee);
 
-			await _gContext.Employees.AddAsync(employee);
+			await _context.Employees.AddAsync(employee);
 
-			var isTemplate = _gContext.NameTemplates.Select(x=>x.Name).Contains(employee.Name);
+			var isTemplate = _context.NameTemplates.Select(x=>x.Name).Contains(employee.Name);
 			if (isTemplate)
-				await _gContext.NameTemplates.AddAsync(new NameTemplate() {Name = employee.Name});
+				await _context.NameTemplates.AddAsync(new NameTemplate() {Name = employee.Name});
 
-			await _gContext.SaveChangesAsync();
+			await _context.SaveChangesAsync();
 			return RedirectToAction("Index", "Home");
 		}
 	}

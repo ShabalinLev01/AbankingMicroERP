@@ -1,5 +1,4 @@
-﻿@using AbankingMicroERP.Models
-@model Language
+﻿@model Language
 @{
 	ViewData["Title"] = "Список отделов и языков";
 }
@@ -65,7 +64,7 @@
 	<h1 class="display-4">Редактирование отделов</h1>
 </div>
 
-<div class="card-body float-left">
+<div class="card-body float-left w-50">
 
 	<table class="table table-striped">
 		<thead>
@@ -74,8 +73,8 @@
 				<th scope="col">Название отдела</th>
 				<th scope="col"></th>
 				<th scope="col">
-					<a class="text-dark" asp-area="" asp-controller="Add" asp-action="Index">
-						<i class="bi bi-person-plus-fill"></i>
+					<a class="text-dark" asp-area="" asp-controller="ConfigGroup" asp-action="AddDepartment">
+						<i class="bi bi-plus-lg"></i>
 					</a>
 				</th>
 			</tr>
@@ -88,7 +87,7 @@
 				<tr>
 					<th scope="row">@indexDepartment</th>
 					<td>@department.Name</td>
-					<td><a class="text-dark" href="/Edit/Index?id=@department.Id"><i class="bi bi-pencil-square"></i></a></td>
+					<td><a class="text-dark" href="/ConfigGroup/EditDepartment?id=@department.Id"><i class="bi bi-pencil-square"></i></a></td>
 					<td><a class="text-dark" href="#" onclick="DeleteDepartment('@department.Id'); return false;"><i class="bi bi-trash-fill"></i></a></td>
 				</tr>
 				indexDepartment++;
@@ -97,7 +96,7 @@
 		</tbody>
 	</table>
 </div>
-<div class="card-body float-right">
+<div class="card-body float-right w-50">
 	<table class="table table-striped">
 		<thead>
 		<tr>
@@ -105,8 +104,8 @@
 			<th scope="col">Название языка</th>
 			<th scope="col"></th>
 			<th scope="col">
-				<a class="text-dark" asp-area="" asp-controller="Add" asp-action="Index">
-					<i class="bi bi-person-plus-fill"></i>
+				<a class="text-dark" asp-area="" asp-controller="ConfigGroup" asp-action="AddLanguage">
+					<i class="bi bi-plus-lg"></i>
 				</a>
 			</th>
 		</tr>
@@ -119,7 +118,7 @@
 				<tr>
 					<th scope="row">@indexLanguage</th>
 					<td>@language.Name</td>
-					<td><a class="text-dark" href="/Edit/Index?id=@language.Id"><i class="bi bi-pencil-square"></i></a></td>
+					<td><a class="text-dark" href="/ConfigGroup/EditLanguage?id=@language.Id"><i class="bi bi-pencil-square"></i></a></td>
 					<td><a class="text-dark" href="#" onclick="DeleteLanguage('@language.Id'); return false;"><i class="bi bi-trash-fill"></i></a></td>
 				</tr>
 				indexLanguage++;

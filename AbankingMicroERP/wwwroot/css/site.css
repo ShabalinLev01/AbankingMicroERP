@@ -111,3 +111,7 @@ body {
     -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
+
+table.table.table-striped {
+    border: 1px solid #d3d3d3;
+}

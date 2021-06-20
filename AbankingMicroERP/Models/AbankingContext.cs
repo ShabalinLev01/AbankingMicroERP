@@ -29,6 +29,14 @@ namespace AbankingMicroERP.Models
 				entity.HasIndex(x => x.LanguageId);
 			});
 
+			modelBuilder.Entity<Language>()
+				.HasIndex(u => u.Name)
+				.IsUnique();
+
+			modelBuilder.Entity<Department>()
+				.HasIndex(u => u.Name)
+				.IsUnique();
+
 			var language1 = new Language { Name = "C#" };
 			var language2 = new Language { Name = "C++" };
 			var language3 = new Language { Name = "PHP" };
