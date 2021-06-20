@@ -1,0 +1,130 @@
+﻿@using AbankingMicroERP.Models
+@model Language
+@{
+	ViewData["Title"] = "Список отделов и языков";
+}
+<script>
+	$.ajax({
+		url: "/Add/GetDepartments",
+		type: "GET",
+		dataType: "json",
+		success: function (data) {
+			$.each(data, function (index) {
+				$('#formDepartmentId').append($('<option>', { value : data[index].id}).text(data[index].name));
+			});
+		}
+	});
+
+	$.ajax({
+		url: "/Add/GetLanguages",
+		type: "GET",
+		dataType: "json",
+		success: function (data) {
+			$.each(data, function (index) {
+				$('#formLanguageId').append($('<option>', { value: data[index].id }).text(data[index].name));
+			});
+		}
+	});
+
+	function DeleteDepartment(id) {
+		$.ajax({
+			url: "/ConfigGroup/DeleteDepartment",
+			type: "DELETE",
+			dataType: "json",
+			data: { id: id },
+			success: function (data) {
+				location.reload();
+			},
+			error: function () {
+				location.reload();
+				alert('Unknown Error');
+			}
+		});
+		return false;
+	}
+
+	function DeleteLanguage(id) {
+		$.ajax({
+			url: "/ConfigGroup/DeleteLanguage",
+			type: "DELETE",
+			dataType: "json",
+			data: { id: id },
+			success: function (data) {
+				location.reload();
+			},
+			error: function () {
+				location.reload();
+				alert('Unknown Error');
+			}
+		});
+		return false;
+	}
+
+</script>
+<div class="text-center">
+	<h1 class="display-4">Редактирование отделов</h1>
+</div>
+
+<div class="card-body float-left">
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col"></th>
+				<th scope="col">Название отдела</th>
+				<th scope="col"></th>
+				<th scope="col">
+					<a class="text-dark" asp-area="" asp-controller="Add" asp-action="Index">
+						<i class="bi bi-person-plus-fill"></i>
+					</a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		@{
+			var indexDepartment = 1;
+			foreach (var department in (List<Department>) ViewBag.Departments)
+			{
+				<tr>
+					<th scope="row">@indexDepartment</th>
+					<td>@department.Name</td>
+					<td><a class="text-dark" href="/Edit/Index?id=@department.Id"><i class="bi bi-pencil-square"></i></a></td>
+					<td><a class="text-dark" href="#" onclick="DeleteDepartment('@department.Id'); return false;"><i class="bi bi-trash-fill"></i></a></td>
+				</tr>
+				indexDepartment++;
+			}
+		}
+		</tbody>
+	</table>
+</div>
+<div class="card-body float-right">
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th scope="col"></th>
+			<th scope="col">Название языка</th>
+			<th scope="col"></th>
+			<th scope="col">
+				<a class="text-dark" asp-area="" asp-controller="Add" asp-action="Index">
+					<i class="bi bi-person-plus-fill"></i>
+				</a>
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+		@{
+			var indexLanguage = 1;
+			foreach (var language in (List<Language>) ViewBag.Languages)
+			{
+				<tr>
+					<th scope="row">@indexLanguage</th>
+					<td>@language.Name</td>
+					<td><a class="text-dark" href="/Edit/Index?id=@language.Id"><i class="bi bi-pencil-square"></i></a></td>
+					<td><a class="text-dark" href="#" onclick="DeleteLanguage('@language.Id'); return false;"><i class="bi bi-trash-fill"></i></a></td>
+				</tr>
+				indexLanguage++;
+			}
+		}
+		</tbody>
+	</table>
+</div>

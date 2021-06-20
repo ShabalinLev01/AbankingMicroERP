@@ -1,0 +1,68 @@
+﻿@model List<AbankingMicroERP.Models.Employee>
+@{
+	ViewData["Title"] = "Home Page";
+
+}
+<script>
+
+	function DeleteUser(id) {
+		$.ajax({
+			url: "/Home/Delete",
+			type: "DELETE",
+			dataType: "json",
+			data: { id: id },
+			success: function (data) {
+				location.reload();
+			},
+			error: function () {
+				location.reload();
+				alert('Unknown Error');
+			}
+		});
+		return false;
+	}
+
+</script>
+<div class="text-center">
+	<h1 class="display-4">Список сотрудников</h1>
+</div>
+<div class="card-body">
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col"></th>
+				<th scope="col">Имя</th>
+				<th scope="col">Фамилия</th>
+				<th scope="col">Возраст</th>
+				<th scope="col">Отдел</th>
+				<th scope="col">Язык</th>
+				<th scope="col"></th>
+				<th scope="col">
+					<a class="text-dark" asp-area="" asp-controller="Add" asp-action="Index">
+						<i class="bi bi-person-plus-fill"></i>
+					</a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@{
+				var index = 1;
+				foreach (var employer in Model)
+				{
+					<tr>
+						<th scope="row">@index</th>
+						<td>@employer.Name</td>
+						<td>@employer.Surname</td>
+						<td>@employer.Age</td>
+						<td>@(employer.Department == null ? "---" : employer.Department.Name)</td>
+						<td>@(employer.Language == null ? "---" : employer.Language.Name)</td>
+						<td><a class="text-dark" href="/Edit/Index?id=@employer.Id"><i class="bi bi-pencil-square"></i></a></td>
+						<td><a class="text-dark" href="#" onclick="DeleteUser('@employer.Id'); return false;"><i class="bi bi-trash-fill"></i></a></td>
+					</tr>
+					index++;
+				}
+			}
+		</tbody>
+	</table>
+</div>

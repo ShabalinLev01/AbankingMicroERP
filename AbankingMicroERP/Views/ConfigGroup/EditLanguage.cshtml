@@ -1,0 +1,59 @@
+﻿@model AbankingMicroERP.Models.Language
+@{
+	ViewData["Title"] = "Добавление сотрудника";
+}
+<script>
+	$(function () {
+		var availableTags = [
+			"ActionScript",
+			"BASIC",
+			"C",
+			"C++",
+			"C#",
+			"Clojure",
+			"COBOL",
+			"ColdFusion",
+			"Delpi",
+			"Erlang",
+			"Fortran",
+			"F#",
+			"Groovy",
+			"Golang",
+			"Haskell",
+			"Java",
+			"Kotlin",
+			"JavaScript",
+			"Lisp",
+			"Perl",
+			"PHP",
+			"Python",
+			"Ruby",
+			"Rust",
+			"Scala",
+			"Swift"
+		];
+		$("#formName").autocomplete({
+			source: availableTags
+		});
+	});
+
+</script>
+<div class="text-center">
+	<h1 class="display-4">Добавление сотрудника</h1>
+</div>
+
+<div class="card-body">
+
+	<form asp-antiforgery="true" asp-action="Index" asp-controller="Add" style="margin-left: 25%; margin-right: 25%;">
+		<div class="validation" asp-validation-summary="ModelOnly"></div>
+		<div class="form-group">
+			<input type="text" class="form-control" id="formId" name="Id" placeholder="Имя" asp-for="Id" style="display: none;" required>
+		</div>
+		<div class="form-group">
+			<label for="formName" asp-for="Name">Имя</label>
+			<input type="text" class="form-control" id="formName" name="Name" placeholder="Имя" asp-for="Name" required>
+			<span asp-validation-for="Name" />
+		</div>
+		<button type="submit" class="btn btn-primary mb-2">Изменить язык</button>
+	</form>
+</div>
