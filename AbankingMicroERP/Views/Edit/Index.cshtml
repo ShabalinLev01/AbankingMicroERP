@@ -29,8 +29,13 @@
 		type: "GET",
 		dataType: "json",
 		success: function (data) {
+			var chosen =  @Html.Raw(Json.Serialize(Model.DepartmentId));
+			var chosenId = data.map(a => a.id).indexOf(chosen);
+			if (chosenId !== -1)
+				$('#formDepartmentId').append($('<option>', { value: data[chosenId].id }).text(data[chosenId].name));
 			$.each(data, function (index) {
-				$('#formDepartmentId').append($('<option>', { value : data[index].id}).text(data[index].name));
+				if (index !== chosenId)
+					$('#formDepartmentId').append($('<option>', { value: data[index].id }).text(data[index].name));
 			});
 		}
 	});
@@ -40,8 +45,13 @@
 		type: "GET",
 		dataType: "json",
 		success: function (data) {
+			var chosen =  @Html.Raw(Json.Serialize(Model.LanguageId));
+			var chosenId = data.map(a => a.id).indexOf(chosen);
+			if (chosenId !== -1)
+				$('#formLanguageId').append($('<option>', { value: data[chosenId].id }).text(data[chosenId].name));
 			$.each(data, function (index) {
-				$('#formLanguageId').append($('<option>', { value: data[index].id }).text(data[index].name));
+				if (index !== chosenId)
+					$('#formLanguageId').append($('<option>', { value: data[index].id }).text(data[index].name));
 			});
 		}
 	});
