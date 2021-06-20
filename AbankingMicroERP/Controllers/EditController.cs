@@ -11,11 +11,20 @@ namespace AbankingMicroERP.Controllers
 	{
 		private readonly AbankingContext _context;
 
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="context"></param>
 		public EditController(AbankingContext context)
 		{
 			_context = context;
 		}
 
+		/// <summary>
+		/// Return view with filled form
+		/// </summary>
+		/// <param name="id">Employee's id</param>
+		/// <returns></returns>
 		public async Task<IActionResult> Index(Guid id)
 		{
 			var employer = await _context.Employees.FindAsync(id); 
@@ -25,6 +34,14 @@ namespace AbankingMicroERP.Controllers
 			return View(employer);
 		}
 
+		/// <summary>
+		/// Get Edited Employee
+		/// !NOTICE
+		/// I think that it's method should be HttpPatch/Put, but we need use AJAX Request instead of Html Form.
+		/// In this case (Test Task) I prefer use Html Form
+		/// </summary>
+		/// <param name="employee">Edited employee</param>
+		/// <returns></returns>
 		[HttpPost]
 		public async Task<IActionResult> Index(Employee employee)
 		{
@@ -44,36 +61,6 @@ namespace AbankingMicroERP.Controllers
 			await _context.SaveChangesAsync();
 
 			return RedirectToAction("Index", "Home");
-		}
-
-		[HttpGet]
-		public async Task<JsonResult> GetNames(string prefix)
-		{
-			var namesTemplateList = await _context.NameTemplates.ToListAsync();
-
-			if (!namesTemplateList.Any(x => x.Name.StartsWith(prefix)))
-				return Json(null);
-
-			var matchedNames = namesTemplateList
-				.Where(x => x.Name.StartsWith(prefix))
-				.Select(x => x.Name)
-				.ToList();
-			return Json(matchedNames);
-		}
-
-		[HttpGet]
-		public async Task<JsonResult> GetDepartments()
-		{
-			var departments = await _context.Departments.ToListAsync();
-			return Json(departments);
-		}
-
-
-		[HttpGet]
-		public async Task<JsonResult> GetLanguages()
-		{
-			var languages = await _context.Languages.ToListAsync();
-			return Json(languages);
 		}
 	}
 }

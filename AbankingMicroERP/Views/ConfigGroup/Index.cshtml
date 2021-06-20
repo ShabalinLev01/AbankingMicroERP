@@ -3,27 +3,6 @@
 	ViewData["Title"] = "Список отделов и языков";
 }
 <script>
-	$.ajax({
-		url: "/Add/GetDepartments",
-		type: "GET",
-		dataType: "json",
-		success: function (data) {
-			$.each(data, function (index) {
-				$('#formDepartmentId').append($('<option>', { value : data[index].id}).text(data[index].name));
-			});
-		}
-	});
-
-	$.ajax({
-		url: "/Add/GetLanguages",
-		type: "GET",
-		dataType: "json",
-		success: function (data) {
-			$.each(data, function (index) {
-				$('#formLanguageId').append($('<option>', { value: data[index].id }).text(data[index].name));
-			});
-		}
-	});
 
 	function DeleteDepartment(id) {
 		$.ajax({

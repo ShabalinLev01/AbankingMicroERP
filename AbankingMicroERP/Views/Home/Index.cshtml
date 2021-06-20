@@ -57,7 +57,7 @@
 						<td>@employer.Age</td>
 						<td>@(employer.Department == null ? "---" : employer.Department.Name)</td>
 						<td>@(employer.Language == null ? "---" : employer.Language.Name)</td>
-						<td><a class="text-dark" href="/Edit/Index?id=@employer.Id"><i class="bi bi-pencil-square"></i></a></td>
+						<td><a class="text-dark" href="/Edit?id=@employer.Id"><i class="bi bi-pencil-square"></i></a></td>
 						<td><a class="text-dark" href="#" onclick="DeleteUser('@employer.Id'); return false;"><i class="bi bi-trash-fill"></i></a></td>
 					</tr>
 					index++;

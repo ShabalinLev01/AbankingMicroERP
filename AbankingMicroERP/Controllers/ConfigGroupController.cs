@@ -16,7 +16,10 @@ namespace AbankingMicroERP.Controllers
 			_context = context;
 		}
 
-
+		/// <summary>
+		/// Return
+		/// </summary>
+		/// <returns></returns>
 		public IActionResult Index()
 		{
 			ViewBag.Departments = _context.Departments.ToList();
@@ -24,6 +27,10 @@ namespace AbankingMicroERP.Controllers
 			return View();
 		}
 
+		/// <summary>
+		/// Get List of Departments
+		/// </summary>
+		/// <returns>Json List</returns>
 		[HttpGet]
 		public async Task<JsonResult> GetDepartments()
 		{
@@ -32,6 +39,10 @@ namespace AbankingMicroERP.Controllers
 		}
 
 
+		/// <summary>
+		/// Get List of Languages
+		/// </summary>
+		/// <returns>Json List</returns>
 		[HttpGet]
 		public async Task<JsonResult> GetLanguages()
 		{
@@ -41,11 +52,21 @@ namespace AbankingMicroERP.Controllers
 
 		#region AddRegion
 
+		/// <summary>
+		/// Get Form for add Department
+		/// </summary>
+		/// <returns></returns>
+		[HttpGet]
 		public IActionResult AddDepartment()
 		{
 			return View();
 		}
 
+		/// <summary>
+		/// Add Department to DB
+		/// </summary>
+		/// <param name="department"></param>
+		/// <returns></returns>
 		[HttpPost]
 		public async Task<IActionResult> AddDepartment(Department department)
 		{
@@ -61,14 +82,24 @@ namespace AbankingMicroERP.Controllers
 			_context.Departments.Add(department);
 			await _context.SaveChangesAsync();
 
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Index");
 		}
 
+		/// <summary>
+		/// Get Form for Add Language
+		/// </summary>
+		/// <returns></returns>
+		[HttpGet]
 		public IActionResult AddLanguage()
 		{
 			return View();
 		}
 
+		/// <summary>
+		/// Add Language to DB
+		/// </summary>
+		/// <param name="language"></param>
+		/// <returns></returns>
 		[HttpPost]
 		public async Task<IActionResult> AddLanguage(Language language)
 		{
@@ -84,22 +115,36 @@ namespace AbankingMicroERP.Controllers
 			_context.Languages.Add(language);
 			await _context.SaveChangesAsync();
 
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Index");
 		}
 
 		#endregion
 
 		#region EditRegion
 
+		/// <summary>
+		/// Get View for Edit Department with model
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		[HttpGet]
 		public async Task<IActionResult> EditDepartment(Guid id)
 		{
 			var department = await _context.Departments.FindAsync(id);
 
 			if (department == null)
-				return RedirectToAction("Index", "Home");
+				return RedirectToAction("Index");
 			return View(department);
 		}
 
+		/// <summary>
+		/// Edit Department
+		/// !NOTICE
+		/// I think that it's method should be HttpPatch/Put, but we need use AJAX Request instead of Html Form.
+		/// In this case (Test Task) I prefer use Html Form
+		/// </summary>
+		/// <param name="department"></param>
+		/// <returns></returns>
 		[HttpPost]
 		public async Task<IActionResult> EditDepartment(Department department)
 		{
@@ -114,23 +159,37 @@ namespace AbankingMicroERP.Controllers
 
 			var oldDepartment = await _context.Departments.FindAsync(department.Id);
 			if (oldDepartment == null)
-				return RedirectToAction("Index", "Home");
+				return RedirectToAction("Index");
 
 			oldDepartment.Name = department.Name;
 			await _context.SaveChangesAsync();
 
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Index");
 		}
 
+		/// <summary>
+		/// Get View for Edit Language with model
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		[HttpGet]
 		public async Task<IActionResult> EditLanguage(Guid id)
 		{
 			var language = await _context.Languages.FindAsync(id);
 
 			if (language == null)
-				return RedirectToAction("Index", "Home");
+				return RedirectToAction("Index");
 			return View(language);
 		}
 
+		/// <summary>
+		/// Edit Language
+		/// !NOTICE
+		/// I think that it's method should be HttpPatch/Put, but we need use AJAX Request instead of Html Form.
+		/// In this case (Test Task) I prefer use Html Form
+		/// </summary>
+		/// <param name="language"></param>
+		/// <returns></returns>
 		[HttpPost]
 		public async Task<IActionResult> EditLanguage(Language language)
 		{
@@ -145,19 +204,23 @@ namespace AbankingMicroERP.Controllers
 
 			var oldLanguage = await _context.Languages.FindAsync(language.Id);
 			if (oldLanguage == null)
-				return RedirectToAction("Index", "Home");
+				return RedirectToAction("Index");
 
 			oldLanguage.Name = language.Name;
 			await _context.SaveChangesAsync();
 
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Index");
 		}
 
 		#endregion
 
 		#region Delete Region
 
-
+		/// <summary>
+		/// Delete Department from DB
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		[HttpDelete]
 		public async Task<IActionResult> DeleteDepartment(Guid id)
 		{
@@ -175,6 +238,11 @@ namespace AbankingMicroERP.Controllers
 			return Json(new { success = true, message = "Ok", status = 200 });
 		}
 
+		/// <summary>
+		/// Delete Language from DB
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		[HttpDelete]
 		public async Task<IActionResult> DeleteLanguage(Guid id)
 		{

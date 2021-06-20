@@ -9,16 +9,29 @@ namespace AbankingMicroERP.Controllers
 	{
 		private readonly AbankingContext _context;
 
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="context"></param>
 		public AddController(AbankingContext context)
 		{
 			_context = context;
 		}
 
+		/// <summary>
+		/// Get Form for add employee
+		/// </summary>
+		/// <returns></returns>
 		public IActionResult Index()
 		{
 			return View();
 		}
 
+		/// <summary>
+		/// Add Employee to DB
+		/// </summary>
+		/// <param name="employee"></param>
+		/// <returns></returns>
 		[HttpPost]
 		public async Task<IActionResult> Index(Employee employee)
 		{

@@ -19,8 +19,8 @@ namespace AbankingMicroERP.Models
 		{
 			Database.EnsureCreated();
 		}
-
-
+		
+		/// <inheritdoc/>
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Employee>(entity =>

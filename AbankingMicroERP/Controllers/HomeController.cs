@@ -5,24 +5,29 @@ using System.Threading.Tasks;
 using AbankingMicroERP.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace AbankingMicroERP.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
 		private readonly AbankingContext _context;
 
-		public HomeController(ILogger<HomeController> logger, AbankingContext context)
+		/// <summary>
+		/// Constructor of HomeController
+		/// </summary>
+		/// <param name="context"></param>
+		public HomeController(AbankingContext context)
 		{
-			_logger = logger;
 			_context = context;
 		}
 
+		/// <summary>
+		/// Return View with list employee
+		/// </summary>
+		/// <returns></returns>
 		public IActionResult Index()
 		{
-			var employees = _context.Employees.AsQueryable()
+			var employees = _context.Employees
 				.Include(x =>x.Department)
 				.Include(x => x.Language)
 				.ToList();
@@ -30,7 +35,10 @@ namespace AbankingMicroERP.Controllers
 			return View(employees);
 		}
 
-
+		/// <summary>
+		/// ErrorPage
+		/// </summary>
+		/// <returns></returns>
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
@@ -38,6 +46,11 @@ namespace AbankingMicroERP.Controllers
 				{ RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 
+		/// <summary>
+		/// Delete Employer
+		/// </summary>
+		/// <param name="id">Employer's id</param>
+		/// <returns>Status</returns>
 		[HttpDelete]
 		public async Task<IActionResult> Delete(Guid id)
 		{
@@ -51,6 +64,11 @@ namespace AbankingMicroERP.Controllers
 			return Json(new { success = true, message = "Ok", status = 200 });
 		}
 
+		/// <summary>
+		/// Get Names for Autocomplete
+		/// </summary>
+		/// <param name="prefix">Prefix of name</param>
+		/// <returns>Matched names</returns>
 		[HttpGet]
 		public async Task<JsonResult> GetNames(string prefix)
 		{
